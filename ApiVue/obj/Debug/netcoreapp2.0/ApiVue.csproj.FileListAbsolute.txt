@@ -1,0 +1,10 @@
+C:\Users\Paulo Bressan\source\repos\ApiVue\ApiVue\bin\Debug\netcoreapp2.0\ApiVue.deps.json
+C:\Users\Paulo Bressan\source\repos\ApiVue\ApiVue\bin\Debug\netcoreapp2.0\ApiVue.runtimeconfig.json
+C:\Users\Paulo Bressan\source\repos\ApiVue\ApiVue\bin\Debug\netcoreapp2.0\ApiVue.runtimeconfig.dev.json
+C:\Users\Paulo Bressan\source\repos\ApiVue\ApiVue\bin\Debug\netcoreapp2.0\ApiVue.dll
+C:\Users\Paulo Bressan\source\repos\ApiVue\ApiVue\obj\Debug\netcoreapp2.0\ApiVue.csproj.CoreCompileInputs.cache
+C:\Users\Paulo Bressan\source\repos\ApiVue\ApiVue\obj\Debug\netcoreapp2.0\ApiVue.AssemblyInfoInputs.cache
+C:\Users\Paulo Bressan\source\repos\ApiVue\ApiVue\obj\Debug\netcoreapp2.0\ApiVue.AssemblyInfo.cs
+C:\Users\Paulo Bressan\source\repos\ApiVue\ApiVue\bin\Debug\netcoreapp2.0\ApiVue.pdb
+C:\Users\Paulo Bressan\source\repos\ApiVue\ApiVue\obj\Debug\netcoreapp2.0\ApiVue.dll
+C:\Users\Paulo Bressan\source\repos\ApiVue\ApiVue\obj\Debug\netcoreapp2.0\ApiVue.pdb
