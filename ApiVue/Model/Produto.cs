@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 
 namespace ApiVue.Model
 {
-    public class Product
+    public class Produto
     {
-        public Product()
+        public Produto()
         {
 
         }
 
-        public Product(string nome, string url)
+        public Produto(string nome, string url)
         {
             this.Nome = nome;
             this.Url = url;
