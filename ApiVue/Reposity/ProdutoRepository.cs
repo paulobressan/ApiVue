@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ApiVue.Reposity
 {
-    public class ProdutoRepository : IDisposable
+    public class ProdutoRepository : IDisposable, IProdutoRepository
     {
         IDbConnection _context;
         public ProdutoRepository()
@@ -21,13 +21,18 @@ namespace ApiVue.Reposity
         {
             var result = await _context.QueryAsync<Produto>("select * from produto", null);
             return result.ToList();
-        } 
+        }
 
         public async Task<Produto> Inserir(Produto produto)
         {
             var result = await _context.QueryAsync<Produto>(@"insert into produto (nome, url) values (@nome, @url);" +
                 "select * from produto where id = (select last_insert_id() as id);", produto);
             return result.Single();
+        }
+
+        public async Task Remover(int id)
+        {
+            await _context.QueryAsync<Produto>(@"delete from produto where id = @id", new { id });
         }
 
         public void Dispose()

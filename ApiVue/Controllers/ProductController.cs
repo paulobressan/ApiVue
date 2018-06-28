@@ -13,13 +13,16 @@ namespace ApiVue.Controllers
     [EnableCors("Politica")]
     public class ProductController : Controller
     {
+        private readonly IProdutoRepository _produtoRepository;
+        public ProductController(IProdutoRepository produtoRepository)
+        {
+            _produtoRepository = produtoRepository;
+        }
+
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            using (ProdutoRepository repository = new ProdutoRepository())
-            {
-                return Ok(await repository.SelecionarTodos());
-            }
+            return Ok(await _produtoRepository.SelecionarTodos());
             //var product = new List<Produto>()
             //{
             //    new Produto("Bola de Basquete","http://avodistribuidora.com.br/wp-content/uploads/2017/10/penalty-oficialfeminino-2.jpg"),
@@ -31,17 +34,29 @@ namespace ApiVue.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Produto produto)
         {
-            using (ProdutoRepository repository = new ProdutoRepository())
+            try
             {
-                try
-                {
-                    return Ok(await repository.Inserir(produto));
+                return Ok(await _produtoRepository.Inserir(produto));
 
-                }
-                catch (Exception ex)
-                {
-                    throw new ArgumentException("Erro de banco de dados");
-                }
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("Erro de banco de dados");
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _produtoRepository.Remover(id);
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("Erro de banco de dados");
             }
         }
     }
