@@ -14,6 +14,9 @@ namespace ApiVue.Controllers
     public class ProductController : Controller
     {
         private readonly IProdutoRepository _produtoRepository;
+
+        public IProdutoRepository ProdutoRepository => _produtoRepository;
+
         public ProductController(IProdutoRepository produtoRepository)
         {
             _produtoRepository = produtoRepository;
@@ -22,13 +25,7 @@ namespace ApiVue.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _produtoRepository.SelecionarTodos());
-            //var product = new List<Produto>()
-            //{
-            //    new Produto("Bola de Basquete","http://avodistribuidora.com.br/wp-content/uploads/2017/10/penalty-oficialfeminino-2.jpg"),
-            //    new Produto("Galinha Pintadinha", "http://2.bp.blogspot.com/-vq_eK8-1ops/T9eBBMOBLvI/AAAAAAAAFiA/xRAHrYEqM_8/s320/Galinha-Pintadinha-png-Queroimagem.com+%281%29.png")
-            //};
-            //return new ObjectResult(product);
+            return Ok(await ProdutoRepository.SelecionarTodos());
         }
 
         [HttpPost]
@@ -36,12 +33,26 @@ namespace ApiVue.Controllers
         {
             try
             {
-                return Ok(await _produtoRepository.Inserir(produto));
+                return Ok(await ProdutoRepository.Inserir(produto));
 
             }
             catch (Exception ex)
             {
                 throw new ArgumentException("Erro de banco de dados");
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] Produto produto)
+        {
+            try
+            {
+               return Ok(await _produtoRepository.Alterar(produto));
+                
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("Erro ao atualizar produto");
             }
         }
 
@@ -50,13 +61,27 @@ namespace ApiVue.Controllers
         {
             try
             {
-                await _produtoRepository.Remover(id);
+                await ProdutoRepository.Remover(id);
                 return Ok();
-
             }
             catch (Exception ex)
             {
                 throw new ArgumentException("Erro de banco de dados");
+            }
+        }
+
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
+        {
+            try
+            {
+                var produto = await ProdutoRepository.SelecionarPorId(id);
+                return Ok(produto);
+            }
+            catch (Exception ex)
+            {
+                throw new ArgumentException("Não foi possivel buscar o produto.");
             }
         }
     }

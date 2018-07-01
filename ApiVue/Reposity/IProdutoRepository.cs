@@ -10,7 +10,8 @@ namespace ApiVue.Reposity
     {
         Task<List<Produto>> SelecionarTodos();
         Task<Produto> Inserir(Produto produto);
+        Task<Produto> Alterar(Produto produto);
         Task Remover(int id);
-
+        Task<Produto> SelecionarPorId(int id);
     }
 }

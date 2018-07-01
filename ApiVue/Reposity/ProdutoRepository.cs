@@ -39,5 +39,18 @@ namespace ApiVue.Reposity
         {
             _context.Dispose();
         }
+
+        public async Task<Produto> SelecionarPorId(int id)
+        {
+            var result = await _context.QueryAsync<Produto>(@"select * from produto where id = @id", new { id });
+            return result.SingleOrDefault();
+        }
+
+        public async Task<Produto> Alterar(Produto produto)
+        {
+            var result = await _context.QueryAsync<Produto>(@"update produto set nome = @nome, url = @url where id = @id;" +
+                "select * from produto where id = @id;", produto);
+            return result.Single();
+        }
     }
 }
